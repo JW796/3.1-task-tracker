@@ -1,13 +1,15 @@
+import { useState } from "react";
 import AddTask from "./components/AddTask";
 
 function App() {
+  const [taskList, setTaskList] = useState([])
   return (
     <>
       <h1 className="text-2xl font-bold py-4 pl-6">03 - Task Tracker</h1>
       <p className="text-xl pl-6">Hello</p>
       <div className="flex flex-row items-center">
         <p className="text-xl pl-6">Click</p>
-        <AddTask />
+        <AddTask taskList={taskList} setTaskList={setTaskList}/>
         <p className="text-xl my-2">to add a new task</p>
       </div>
     </>
