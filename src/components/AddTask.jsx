@@ -14,7 +14,7 @@ const AddTask = ({ taskList, setTaskList }) => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    setTaskList([...taskList], { projectName, taskDescription });
+    setTaskList([...taskList, { projectName, taskDescription }]);
     setAddModal(false);
     setProjectName("");
     setTaskDescription("");
