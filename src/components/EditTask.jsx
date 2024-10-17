@@ -1,38 +1,49 @@
 import { useEffect, useState } from "react";
 
-const EditTask = ({ task, index, taskList, setTaskList }) => {
+const EditTask = ({ task, taskList, setTaskList }) => {
   const [editModal, setEditModal] = useState(false);
 
   const [projectName, setProjectName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setProjectName(task.projectName);
     setTaskDescription(task.taskDescription);
-  }, [])
+  }, []);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
 
-    if (name === "projectName") setProjectName(value);
+    if (name === "projectName") {
+      setProjectName(value);
+      setErrorMessage("");
+    }
+
+    if (name === "projectName" && value === "") {
+      setErrorMessage("Enter Project name to continue");
+    }
+
     if (name === "taskDescription") setTaskDescription(value);
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    let taskIndex = taskList.indexOf(task);
-    taskList.splice(taskIndex, 1);
-    setTaskList(
-        [...taskList, { projectName, taskDescription }]
-    );
-    setEditModal(false);
+    if (!projectName) {
+      setErrorMessage("Enter project name to continue");
+    } else {
+      let taskIndex = taskList.indexOf(task);
+      taskList.splice(taskIndex, 1);
+      setTaskList([...taskList, { projectName, taskDescription }]);
+      setEditModal(false);
+    }
   };
 
   return (
     <>
-      <button 
-      className="bg-gray-400 text-white text-sm-uppercase font-semibold py-1.5 px-3 rounded-lg"
-      onClick={() => setEditModal(true)}
+      <button
+        className="bg-gray-400 text-white text-sm-uppercase font-semibold py-1.5 px-3 rounded-lg"
+        onClick={() => setEditModal(true)}
       >
         Edit
       </button>
@@ -67,6 +78,9 @@ const EditTask = ({ task, index, taskList, setTaskList }) => {
                     onChange={handleInput}
                     required
                   />
+                  <p className="text-red-500 text-center mt-2 mb-5">
+                    {errorMessage}
+                  </p>
                 </div>
                 <div>
                   <label className="track-wide uppercase text-gray-700 text-xs font-semibold mb-2 text-xs font-semibolfd mb-2 block">
