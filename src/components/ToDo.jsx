@@ -1,6 +1,8 @@
+import { useState } from "react";
 import EditTask from "./EditTask";
 
 const ToDo = ({ task, index, taskList, setTaskList }) => {
+  const [time, setTime] = useState(0);
 
   const handleDelete = itemID => {
     let removeIndex = taskList.indexOf(task);
