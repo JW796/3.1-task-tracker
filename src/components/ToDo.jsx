@@ -24,6 +24,17 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
           />
         </div>
         <p className="text-lg py-2">{task.taskDescription}</p>
+        <div>
+          <div>
+            <span>{("0" + Math.floor((time / 3600000) % 24)).slice(-2)}:</span>
+            <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+            <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+            <span>{("0" + Math.floor((time / 10) % 100)).slice(-2)}</span>
+          </div>
+          <div>
+
+          </div>
+        </div>
         <div className="w-full flex justify-center">
           <button
             className="bg-red-500 text-white text-sm uppercase font-semibold py-1.5 px-3 mt-6 mb-1 rounded-lg"
