@@ -4,6 +4,7 @@ import ToDo from "./components/ToDo";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+  console.log(taskList);
   return (
     <>
       <h1 className="text-2xl font-bold py-4 pl-6">03 - Task Tracker</h1>
@@ -18,7 +19,6 @@ function App() {
           To Do:
         </h2>
         {taskList.map((task, i) => (
-          <>
             <ToDo
               key={i}
               task={task}
@@ -26,7 +26,6 @@ function App() {
               taskList={taskList}
               setTaskList={setTaskList}
             />
-          </>
         ))}
       </div>
     </>
