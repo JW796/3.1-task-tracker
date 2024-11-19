@@ -1,10 +1,17 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDrag } from "react-dnd";
 import EditTask from "./EditTask";
 
 const ToDo = ({ task, index, taskList, setTaskList }) => {
   const [time, setTime] = useState(task.duration);
   const [running, setRunning] = useState(false);
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "todo",
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    })
+  }))
 
   useEffect(() => {
     let interval;

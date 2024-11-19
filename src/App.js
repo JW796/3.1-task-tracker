@@ -4,14 +4,14 @@ import ToDo from "./components/ToDo";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
-  
-  useEffect (() => {
+
+  useEffect(() => {
     let array = localStorage.getItem("taskList");
 
     if (array) {
-      setTaskList(JSON.parse(array))
+      setTaskList(JSON.parse(array));
     }
-  }, [])
+  }, []);
 
   return (
     <>
