@@ -8,6 +8,13 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
   const [running, setRunning] = useState(false);
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "todo",
+    item: {
+      id: index,
+      projectName: task.projectName,
+      taskDescription: task.taskDescription,
+      timestamp: timestamp,
+      duration: task.duration
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     })

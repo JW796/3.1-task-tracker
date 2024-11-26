@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { UseDrop } from "react-dnd"
 import AddTask from "./components/AddTask";
 import ToDo from "./components/ToDo";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+  const [Completed, setCompleted] = useState([]);
 
   useEffect(() => {
     let array = localStorage.getItem("taskList");
@@ -12,6 +14,18 @@ function App() {
       setTaskList(JSON.parse(array));
     }
   }, []);
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "todo",
+    drop: (item) => addToCompleted(),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    })
+  }))
+
+  const addToCompleted = () => {
+
+  }
 
   return (
     <>
@@ -41,6 +55,15 @@ function App() {
           <h2 className="text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-4 bg-gray-300">
             Completed:
           </h2>
+          {completed.map((task, i) => (
+            <ToDo
+              key={i}
+              task={task}
+              index={i}
+              taskList={taskList}
+              setTaskList={setTaskList}
+            />
+          ))}
         </div>
       </div>
     </>
