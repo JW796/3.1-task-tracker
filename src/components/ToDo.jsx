@@ -12,7 +12,7 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
       id: index,
       projectName: task.projectName,
       taskDescription: task.taskDescription,
-      timestamp: timestamp,
+      timestamp: task.timestamp,
       duration: task.duration
     },
     collect: (monitor) => ({

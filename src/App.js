@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { UseDrop } from "react-dnd"
+import { useDrop } from "react-dnd";
 import AddTask from "./components/AddTask";
 import ToDo from "./components/ToDo";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
-  const [Completed, setCompleted] = useState([]);
+  const [completed, setCompleted] = useState([]);
 
   useEffect(() => {
     let array = localStorage.getItem("taskList");
@@ -17,15 +17,32 @@ function App() {
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "todo",
-    drop: (item) => addToCompleted(),
+    drop: (item) =>
+      addToCompleted(
+        item.id,
+        item.projectName,
+        item.taskDescription,
+        item.timestamp,
+        item.duration
+      ),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
-    })
-  }))
+    }),
+  }));
 
-  const addToCompleted = () => {
-
-  }
+  const addToCompleted = (
+    id,
+    projectName,
+    taskDescription,
+    timeStamp,
+    duration
+  ) => {
+    const moveTask = taskList.filter((task) => id === task.id);
+    setCompleted((completed) => [
+      ...completed,
+      { moveTask, projectName, taskDescription, timeStamp, duration },
+    ]);
+  };
 
   return (
     <>
@@ -51,7 +68,7 @@ function App() {
             />
           ))}
         </div>
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col" ref={drop}>
           <h2 className="text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-4 bg-gray-300">
             Completed:
           </h2>
