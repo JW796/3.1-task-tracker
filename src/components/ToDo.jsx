@@ -13,12 +13,12 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
       projectName: task.projectName,
       taskDescription: task.taskDescription,
       timestamp: task.timestamp,
-      duration: task.duration
+      duration: task.duration,
     },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
-    })
-  }))
+    }),
+  }));
 
   useEffect(() => {
     let interval;
@@ -40,26 +40,26 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
       projectName: task.projectName,
       taskDescription: task.taskDescription,
       timestamp: task.timestamp,
-      duration: time
-    })
+      duration: time,
+    });
 
-    localStorage.setItem("taskList", JSON.stringify(taskList))
+    localStorage.setItem("taskList", JSON.stringify(taskList));
     window.location.reload();
-  }
+  };
 
-  const handleDelete = itemID => {
+  const handleDelete = (itemID) => {
     let removeIndex = taskList.indexOf(task);
     taskList.splice(removeIndex, 1);
-    localStorage.setItem("taskList",  JSON.stringify(taskList));
+    localStorage.setItem("taskList", JSON.stringify(taskList));
     window.location.reload();
-    // setTaskList((currentTasks) =>
-    //   currentTasks.filter((todo) => todo.id !== itemID)
-    // );
   };
 
   return (
     <>
-      <div className="flex flex-col items-start justify-start bg-white my-4 ml-6 py-4 px-6 w-3/4 max-w-lg"ref={drag}>
+      <div
+        className="flex flex-col items-start justify-start bg-white my-4 py-4 px-6 w-3/4 max-w-lg"
+        ref={drag}
+      >
         <div className="w-full flex flex-row justify-between">
           <p className="font-semibold text-xl">{task.projectName}</p>
           <EditTask
