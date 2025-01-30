@@ -76,7 +76,7 @@ function App() {
           </h2>
           {completed.map((task, i) => (
             <ToDo
-              key={i}
+              key={new Date().getTime() + Math.floor(Math.random() * 1000)}
               task={task}
               index={i}
               taskList={taskList}
